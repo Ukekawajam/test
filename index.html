@@ -1,2 +1,108 @@
-受川のテスト
-受川のテスト２
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>ガチャゲーム</title>
+
+<style>
+body{
+    font-family: sans-serif;
+    background: linear-gradient(135deg,#1e3c72,#2a5298);
+    text-align:center;
+    color:white;
+    margin:0;
+    padding-top:50px;
+}
+
+h1{
+    font-size:40px;
+}
+
+#gachaBox{
+    background:white;
+    color:black;
+    width:300px;
+    margin:30px auto;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+#result{
+    font-size:28px;
+    margin:20px 0;
+    height:40px;
+}
+
+button{
+    font-size:20px;
+    padding:12px 25px;
+    border:none;
+    border-radius:10px;
+    background:gold;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+.rarityN{color:gray;}
+.rarityR{color:blue;}
+.raritySR{color:purple;}
+.raritySSR{color:red; font-weight:bold;}
+
+</style>
+</head>
+
+<body>
+
+<h1>🎰 ガチャゲーム</h1>
+
+<div id="gachaBox">
+
+<div id="result">ボタンを押してガチャ！</div>
+
+<button onclick="drawGacha()">ガチャを引く</button>
+
+</div>
+
+<script>
+
+const characters = [
+{name:"スライム", rarity:"N", class:"rarityN", rate:50},
+{name:"ゴブリン", rarity:"N", class:"rarityN", rate:25},
+{name:"騎士", rarity:"R", class:"rarityR", rate:15},
+{name:"魔法使い", rarity:"SR", class:"raritySR", rate:8},
+{name:"ドラゴン", rarity:"SSR", class:"raritySSR", rate:2}
+];
+
+function drawGacha(){
+
+let rand = Math.random()*100;
+let total = 0;
+let result;
+
+for(let c of characters){
+    total += c.rate;
+    if(rand <= total){
+        result = c;
+        break;
+    }
+}
+
+const resultDiv = document.getElementById("result");
+
+resultDiv.innerHTML = `
+<span class="${result.class}">
+${result.rarity} ★ ${result.name}
+</span>
+`;
+
+}
+
+</script>
+
+</body>
+</html>
